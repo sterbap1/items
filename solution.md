@@ -8,7 +8,7 @@ mvn clean install
 ```
 Ensure the final artifact `./target/items-web.war` exists
 
-This WAR can be run directly via `java -jar -Dserver.port=8082 ./target/items-web.war`
+This WAR can be run directly via `java -jar -Dserver.port=3000 ./target/items-web.war`
 
 ### Build Docker image
 Run the following command to build a local Docker image:
@@ -24,8 +24,8 @@ Modifications:
 * Setting `EXTERNAL_WEB_PORT` will set the value the user can visit the web-app from a browser or curl 
 
 ```
-export INTERNAL_WEB_PORT=8080
-export EXTERNAL_WEB_PORT=8082
+export INTERNAL_WEB_PORT=3000
+export EXTERNAL_WEB_PORT=3000
 docker run --env WEB_PORT=${INTERNAL_WEB_PORT} -p ${EXTERNAL_WEB_PORT}:${INTERNAL_WEB_PORT} items:latest
 ```
 
@@ -35,10 +35,10 @@ Via browser or curl, visit `http://localhost:${EXTERNAL_WEB_PORT}/items`
 #### Examples:
 
 * Set the entire list of `Item`s:
-  * `curl --header "Content-Type: application/json" --request POST --data '[{"name": "item1"}, {"name": "item2"}]' http://localhost:8082/items`
+  * `curl --header "Content-Type: application/json" --request POST --data '[{"name": "item1"}, {"name": "item2"}]' http://localhost:3000/items`
 * Add an `Item` with name "test":
-  * `curl --header "Content-Type: application/json" --request PUT --data '[{"name": "test"}]' http://localhost:8082/items`
+  * `curl --header "Content-Type: application/json" --request PUT --data '[{"name": "test"}]' http://localhost:3000/items`
 * Retrieve all `Item`s:
-  * `curl --request GET http://localhost:8082/items`
+  * `curl --request GET http://localhost:3000/items`
 * Delete all `Item`s:
-  * `curl --request DELETE http://localhost:8082/items`
+  * `curl --request DELETE http://localhost:3000/items`

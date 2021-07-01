@@ -11,8 +11,8 @@ fi
 export DOCKER_IMAGE=items:latest
 docker build --tag ${DOCKER_IMAGE} .
 
-export INTERNAL_WEB_PORT=8080
-export EXTERNAL_WEB_PORT=8082
+export INTERNAL_WEB_PORT=3000
+export EXTERNAL_WEB_PORT=3000
 echo "visit http://localhost:${EXTERNAL_WEB_PORT}/items"
 
 docker run --env WEB_PORT=${INTERNAL_WEB_PORT} -p ${EXTERNAL_WEB_PORT}:${INTERNAL_WEB_PORT} ${DOCKER_IMAGE}
