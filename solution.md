@@ -32,6 +32,8 @@ docker run --env WEB_PORT=${INTERNAL_WEB_PORT} -p ${EXTERNAL_WEB_PORT}:${INTERNA
 ### Use the API
 Via browser or curl, visit `http://localhost:${EXTERNAL_WEB_PORT}/items`
 
+### Returning all Items
+Retrieve all Items in the dataset
 #### Examples:
 
 * Set the entire list of `Item`s:
@@ -42,3 +44,12 @@ Via browser or curl, visit `http://localhost:${EXTERNAL_WEB_PORT}/items`
   * `curl --request GET http://localhost:3000/items`
 * Delete all `Item`s:
   * `curl --request DELETE http://localhost:3000/items`
+  
+### Returning Items by ID
+
+One can also retrieve individual Items by their UUID
+#### Examples:
+
+* Get an `Item` by its ID using standard REST Path variables:
+  * `curl --request GET http://localhost:3000/items/eb17ec99-74f7-4f74-b105-6e34df3df3b0`
+  

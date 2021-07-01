@@ -39,4 +39,9 @@ public class ItemController {
     public int deleteAllItems() {
         return itemService.deleteAllItems();
     }
+
+    @GetMapping(path = "/{id}")
+    public Item getItemById(@PathVariable("id") String uuid) {
+        return itemService.getById(uuid);
+    }
 }
