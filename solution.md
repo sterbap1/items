@@ -61,6 +61,8 @@ One can also manage individual Items by their UUID and standard REST Path variab
 ### Future Improvements
 * Add Postgres or MongoDB persistent datastore via Docker container
   * Place web service and persistent storage in a docker-swarm or kubernetes cluster so that the datastore is not exposed publicly, using internal networking to protect the data store
+  * https://docs.docker.com/samples/postgresql_service/
+  * https://www.bmc.com/blogs/mongodb-docker-container/
 * Add better Logging for errors/output to user, including responses to the REST API
 * UNIT TESTS, especially on the service and database level
 * Better JavaDocs
