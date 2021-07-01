@@ -1,1 +1,1 @@
-please see `solutions.md` for further information
+please see `solution.md` for further information
