@@ -52,4 +52,7 @@ One can also retrieve individual Items by their UUID
 
 * Get an `Item` by its ID using standard REST Path variables:
   * `curl --request GET http://localhost:3000/items/eb17ec99-74f7-4f74-b105-6e34df3df3b0`
-  
+* Update an `Item` by its ID with a new name:
+  * `curl --request PUT http://localhost:3000/items/eb17ec99-74f7-4f74-b105-6e34df3df3b0/newNameValue`
+* Delete an `Item` by its ID:
+  * `curl --request DELETE http://localhost:3000/items/eb17ec99-74f7-4f74-b105-6e34df3df3b0`

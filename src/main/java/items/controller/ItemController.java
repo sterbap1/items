@@ -25,14 +25,12 @@ public class ItemController {
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> addItems(@RequestBody List<Item> newItems) {
-        List<Item> itemsWithId = itemService.addAllItems(newItems);
-        return itemsWithId;
+        return itemService.addAllItems(newItems);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     public List<Item> setItems(@RequestBody List<Item> newItems) {
-        List<Item> itemsWithId = itemService.setItems(newItems);
-        return itemsWithId;
+        return itemService.setItems(newItems);
     }
 
     @DeleteMapping()
@@ -41,7 +39,17 @@ public class ItemController {
     }
 
     @GetMapping(path = "/{id}")
-    public Item getItemById(@PathVariable("id") String uuid) {
-        return itemService.getById(uuid);
+    public Item getItemById(@PathVariable("id") String id) {
+        return itemService.getItemById(id);
+    }
+
+    @DeleteMapping(path = "/{id}")
+    public boolean deleteItemById(@PathVariable("id") String id) {
+        return itemService.deleteItemById(id);
+    }
+
+    @PutMapping(path = "/{id}/{name}")
+    public Item updateItemNameById(@PathVariable("id") String id, @PathVariable("name") String newName) {
+        return itemService.updateItemNameById(id, newName);
     }
 }

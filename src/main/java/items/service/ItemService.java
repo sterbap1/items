@@ -83,21 +83,74 @@ public class ItemService {
         }
     }
 
+    private Optional<Item> retrieveItemById(UUID uuid) {
+        for (Item item : this.items) {
+            if (item.getId().equals(uuid)) {
+                return Optional.of(item);
+            }
+        }
+        return Optional.empty();
+    }
+
     /**
      * Retrieve an {@code Item} by its ID. Returns null if not {@code Item} is found with the ID
      *
      * @param id the UUID of the Item to return
      * @return The Item found, or null if not Item found
      */
-    public Item getById(String id) {
-        Optional<UUID> uuid = convertToUuid(id);
-        if (!uuid.isPresent()) {
+    public Item getItemById(String id) {
+        Optional<UUID> optionalUuid = convertToUuid(id);
+        if (!optionalUuid.isPresent()) {
+            LOGGER.error("Unable to convert " + id + " to UUID");
             return null;
         }
 
-        return this.items.stream()
-                .filter(i -> i.getId().equals(uuid.get()))
-                .findFirst()
-                .get();
+        UUID uuid = optionalUuid.get();
+        return retrieveItemById(uuid).orElse(null);
+    }
+
+    /**
+     * Delete {@code Item} by its ID.  Returns a {@code Boolean} for success of deletion
+     *
+     * @param id ID for item to delete
+     * @return true/false for success in deletion
+     */
+    public boolean deleteItemById(String id) {
+        Optional<UUID> optionalUuid = convertToUuid(id);
+        if (!optionalUuid.isPresent()) {
+            LOGGER.error("Unable to convert " + id + " to UUID");
+            return false;
+        }
+
+        Optional<Item> toRemove = retrieveItemById(optionalUuid.get());
+        toRemove.ifPresent(i -> this.items.remove(i));
+        return toRemove.isPresent();
+    }
+
+    /**
+     * Update an {@code Item}'s name by its ID
+     *
+     * @param id ID for the Item to update
+     * @param newName new name String to set on the Item
+     * @return the updated Item
+     */
+    public Item updateItemNameById(String id, String newName) {
+        Optional<UUID> optionalUuid = convertToUuid(id);
+        if (!optionalUuid.isPresent()) {
+            LOGGER.error("Unable to convert " + id + " to UUID");
+            return null;
+        }
+
+        UUID uuid = optionalUuid.get();
+        for (Item item : this.items) {
+            if (!item.getId().equals(uuid)) {
+                continue;
+            }
+
+            item.setName(newName);
+            return item;
+        }
+
+        return null;
     }
 }
